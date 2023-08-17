@@ -45,7 +45,8 @@ smtp_tls_cert_file = os.environ.get('SMTP_TLS_CERT_FILE', None)
 smtp_tls_key = os.environ.get('SMTP_TLS_KEY', None)
 smtp_tls_key_file = os.environ.get('SMTP_TLS_KEY_FILE', None)
 smtp_tls_validate_certs = os.environ.get('SMTP_TLS_VALIDATE_CERTS', 'true') != 'false'
-
+smtp_start_tls= os.environ.get('SMTP_START_TLS', False)
+smtp_use_tls= os.environ.get('SMTP_USE_TLS', True)
 ### Development/Test variables
 # Only send messages to contact listed in ONLY_SEND_TO
 only_send_to = os.environ.get('ONLY_SEND_TO', None)
@@ -78,6 +79,8 @@ smtp = aiosmtplib.SMTP(
     username = smtp_user,
     password = smtp_user_password,
     validate_certs = smtp_tls_validate_certs,
+    start_tls=smtp_start_tls,
+    use_tls=smtp_use_tls
 )
 
 j2env = jinja2.Environment(
